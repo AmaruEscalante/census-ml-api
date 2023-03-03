@@ -1,6 +1,7 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.linear_model import LogisticRegression
 import tensorflow as tf
+import numpy as np
 
 
 # Optional: implement hyperparameter tuning.
@@ -94,4 +95,5 @@ def inference(model, X):
     """
     
     preds = model.predict(X)
+    preds = np.where(preds > 0.5, 1, 0)
     return preds

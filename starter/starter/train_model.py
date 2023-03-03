@@ -28,11 +28,9 @@ train, test = train_test_split(processed_data, train_size=0.80, test_size=0.20, 
 X_train, y_train = train[:, :-1], train[:, -1]
 # Train and save a model.
 model = train_model(X_train, y_train)
-breakpoint()
 
 X_test, y_test = test[:, :-1], test[:, -1]
 preds = inference(model, X_test)
-
 # Compute the model's metrics and print them out.
 precision, recall, fbeta = compute_model_metrics(y_test, preds)
 
