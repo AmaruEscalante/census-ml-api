@@ -21,40 +21,24 @@ def train_model(X_train, y_train):
         Trained machine learning model.
     """
     inputs = tf.keras.Input(shape=(108,))
-    x = tf.keras.layers.Dense(16, activation='relu')(inputs)
-    x = tf.keras.layers.Dense(16, activation='relu')(x)
-    outputs = tf.keras.layers.Dense(1, activation='sigmoid')(x)
+    x = tf.keras.layers.Dense(16, activation="relu")(inputs)
+    x = tf.keras.layers.Dense(16, activation="relu")(x)
+    outputs = tf.keras.layers.Dense(1, activation="sigmoid")(x)
 
     model = tf.keras.Model(inputs=inputs, outputs=outputs)
 
     optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
 
-    metrics = [
-        tf.keras.metrics.BinaryAccuracy(name='acc'),
-        tf.keras.metrics.AUC(name='auc')
-    ]
+    metrics = [tf.keras.metrics.BinaryAccuracy(name="acc"), tf.keras.metrics.AUC(name="auc")]
 
-    model.compile(
-        optimizer=optimizer,
-        loss='binary_crossentropy',
-        metrics=metrics
-    )
+    model.compile(optimizer=optimizer, loss="binary_crossentropy", metrics=metrics)
 
     batch_size = 32
     epochs = 26
 
-    model.fit(
-        X_train,
-        y_train,
-        validation_split=0.2,
-        batch_size=batch_size,
-        epochs=epochs,
-        verbose=True
-    )
-    
+    model.fit(X_train, y_train, validation_split=0.2, batch_size=batch_size, epochs=epochs, verbose=True)
+
     return model
-
-
 
 
 def compute_model_metrics(y, preds):
@@ -80,7 +64,7 @@ def compute_model_metrics(y, preds):
 
 
 def inference(model, X):
-    """ Run model inferences and return the predictions.
+    """Run model inferences and return the predictions.
 
     Inputs
     ------
@@ -93,7 +77,7 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    
+
     preds = model.predict(X)
     preds = np.where(preds > 0.5, 1, 0)
     return preds

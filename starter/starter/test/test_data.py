@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 
+
 def test_column_names(data: pd.DataFrame):
     expected_columns = [
         "age",

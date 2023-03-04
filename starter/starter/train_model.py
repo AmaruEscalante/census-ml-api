@@ -33,4 +33,3 @@ X_test, y_test = test[:, :-1], test[:, -1]
 preds = inference(model, X_test)
 # Compute the model's metrics and print them out.
 precision, recall, fbeta = compute_model_metrics(y_test, preds)
-
