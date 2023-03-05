@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from ml.data import process_data
 from ml.train_model import cat_features
-from ml.model import train_model
+from ml.model import train_model, compute_model_metrics
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import fbeta_score, precision_score, recall_score
@@ -71,3 +71,31 @@ def test_train_model():
     assert precision_score(y_test, y_pred) > 0.5, "Precision score should be > 0.5"
     assert recall_score(y_test, y_pred) > 0.5, "Recall score should be > 0.5"
     assert fbeta_score(y_test, y_pred, beta=1) > 0.5, "F1 score should be > 0.5"
+
+
+def test_compute_model_metrics():
+    # Test case 1: Perfect predictions
+    y_true = np.array([1, 0, 1, 0, 1])
+    y_pred = np.array([1, 0, 1, 0, 1])
+    expected_precision = 1.0
+    expected_recall = 1.0
+    expected_fbeta = 1.0
+    actual_precision, actual_recall, actual_fbeta = compute_model_metrics(y_true, y_pred)
+    assert np.isclose(
+        actual_precision, expected_precision
+    ), f"Expected precision {expected_precision}, but got {actual_precision}"
+    assert np.isclose(actual_recall, expected_recall), f"Expected recall {expected_recall}, but got {actual_recall}"
+    assert np.isclose(actual_fbeta, expected_fbeta), f"Expected F1 {expected_fbeta}, but got {actual_fbeta}"
+
+    # Test case 2: Random predictions
+    y_true = np.random.randint(2, size=100)
+    y_pred = np.random.randint(2, size=100)
+    expected_precision = precision_score(y_true, y_pred, zero_division=1)
+    expected_recall = recall_score(y_true, y_pred, zero_division=1)
+    expected_fbeta = fbeta_score(y_true, y_pred, beta=1, zero_division=1)
+    actual_precision, actual_recall, actual_fbeta = compute_model_metrics(y_true, y_pred)
+    assert np.isclose(
+        actual_precision, expected_precision
+    ), f"Expected precision {expected_precision}, but got {actual_precision}"
+    assert np.isclose(actual_recall, expected_recall), f"Expected recall {expected_recall}, but got {actual_recall}"
+    assert np.isclose(actual_fbeta, expected_fbeta), f"Expected F1 {expected_fbeta}, but got {actual_fbeta}"
