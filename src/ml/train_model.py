@@ -1,8 +1,8 @@
 # Script to train machine learning model.
 
 from sklearn.model_selection import train_test_split
-from ml.data import process_data
-from ml.model import train_model, compute_model_metrics, inference
+from .data import process_data
+from .model import train_model, compute_model_metrics, inference
 import pandas as pd
 import numpy as np
 
@@ -17,6 +17,7 @@ cat_features = [
     "native-country",
 ]
 
+
 def main():
     # Add code to load in the data.
     data = pd.read_csv("src/data/census.csv")
@@ -28,6 +29,9 @@ def main():
     X_train, y_train = train[:, :-1], train[:, -1]
     # Train and save a model.
     model = train_model(X_train, y_train)
+
+    # Save model.
+    model.save("src/model")
 
     X_test, y_test = test[:, :-1], test[:, -1]
     preds = inference(model, X_test)
