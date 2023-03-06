@@ -22,6 +22,9 @@ def train_model(X_train, y_train):
     """
     inputs = tf.keras.Input(shape=(108,))
     x = tf.keras.layers.Dense(16, activation="relu")(inputs)
+    x = tf.keras.layers.Dropout(0.2, seed=42)(x)
+    x = tf.keras.layers.Dense(16, activation="relu")(x)
+    x = tf.keras.layers.Dropout(0.2, seed=42)(x)
     x = tf.keras.layers.Dense(16, activation="relu")(x)
     outputs = tf.keras.layers.Dense(1, activation="sigmoid")(x)
 
