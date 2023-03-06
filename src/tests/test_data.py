@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
-from ml.data import process_data
-from ml.train_model import cat_features
-from ml.model import train_model, compute_model_metrics
+from src.ml.data import process_data
+from src.ml.train_model import cat_features
+from src.ml.model import train_model, compute_model_metrics
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import fbeta_score, precision_score, recall_score

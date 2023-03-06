@@ -1,8 +1,6 @@
 # Script to train machine learning model.
 
 from sklearn.model_selection import train_test_split
-from .data import process_data
-from .model import train_model, compute_model_metrics, inference
 import pandas as pd
 import numpy as np
 
@@ -19,6 +17,9 @@ cat_features = [
 
 
 def main():
+    from data import process_data
+    from model import train_model, compute_model_metrics, inference
+
     # Add code to load in the data.
     data = pd.read_csv("src/data/census.csv")
     X, y, _, _ = process_data(data, categorical_features=cat_features, label="salary", training=True)
@@ -37,6 +38,16 @@ def main():
     preds = inference(model, X_test)
     # Compute the model's metrics and print them out.
     precision, recall, fbeta = compute_model_metrics(y_test, preds)
+
+    # Print metrics.
+    print(f"Precision: {precision}")
+    print(f"Recall: {recall}")
+    print(f"Fbeta b=1: {fbeta}")
+
+
+#     Precision: 0.7480314960629921
+# Recall: 0.60471037555697
+# Fbeta b=1: 0.6687785990848293
 
 
 if __name__ == "__main__":
