@@ -19,7 +19,10 @@ For additional information see the Model Card paper: https://arxiv.org/pdf/1810.
 - Recall: 0.6244430299172502
 - Fbeta b=1: 0.6751548520302821
 
-
 ## Ethical Considerations
+It is important to consider the potential ethical implications of using this model in practice. The model's predictions may impact a person's job prospects, financial stability, and other important life outcomes. As such, it is important to ensure that the model is fair and unbiased, and that it does not unfairly discriminate against any particular groups or individuals. 
 
 ## Caveats and Recommendations
+- The model may not be suitable for use in many populations since only a handful of countries were represented in the dataset.
+- The model is limited by the diversity of the dataset in terms of peoples backgrounds which some have more representation than others. 
+- The dataset was collected in the 1990s and may not be representative of the current population.
