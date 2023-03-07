@@ -20,7 +20,7 @@ For additional information see the Model Card paper: https://arxiv.org/pdf/1810.
 - Fbeta b=1: 0.6751548520302821
 
 ## Ethical Considerations
-It is important to consider the potential ethical implications of using this model in practice. The model's predictions may impact a person's job prospects, financial stability, and other important life outcomes. As such, it is important to ensure that the model is fair and unbiased, and that it does not unfairly discriminate against any particular groups or individuals. 
+Data is a representation of a census from 1994 and persons cannot be identified. The data was collected by the US Census Bureau and the data was cleaned by Ronny Kohavi and Barry Becker. The data was obtained from the UCI Machine Learning Repository.
 
 ## Caveats and Recommendations
 - The model may not be suitable for use in many populations since only a handful of countries were represented in the dataset.
