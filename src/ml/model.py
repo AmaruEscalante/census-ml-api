@@ -1,7 +1,8 @@
-from sklearn.metrics import fbeta_score, precision_score, recall_score
+from sklearn.metrics import fbeta_score, precision_score, recall_score, confusion_matrix
 from sklearn.linear_model import LogisticRegression
 import tensorflow as tf
 import numpy as np
+import pandas as pd
 
 
 # Optional: implement hyperparameter tuning.
@@ -64,6 +65,26 @@ def compute_model_metrics(y, preds):
     precision = precision_score(y, preds, zero_division=1)
     recall = recall_score(y, preds, zero_division=1)
     return precision, recall, fbeta
+
+
+def compute_slice_performance(df: pd.DataFrame, feature: str):
+    unique_values = df[feature].unique()
+    with open("slice_output.txt", "w") as f:
+        for value in unique_values:
+            slice_df = df[df[feature] == value]
+            y_true = slice_df["salary"]
+            y_pred = slice_df["preds"]
+            cm = confusion_matrix(y_true, y_pred)
+            precision = np.diag(cm) / np.sum(cm, axis=0)
+            recall = np.diag(cm) / np.sum(cm, axis=1)
+            f1_score = 2 * precision * recall / (precision + recall)
+            accuracy = np.sum(np.diag(cm)) / np.sum(cm)
+            f.write(f"Metrics for {feature}={value}:\n")
+            f.write(f"Confusion Matrix:\n{cm}\n")
+            f.write(f"Precision: {precision}\n")
+            f.write(f"Recall: {recall}\n")
+            f.write(f"F1 Score: {f1_score}\n")
+            f.write(f"Accuracy: {accuracy}\n\n")
 
 
 def inference(model, X):

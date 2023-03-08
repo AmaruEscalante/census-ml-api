@@ -18,7 +18,7 @@ cat_features = [
 
 def main():
     from data import process_data
-    from model import train_model, compute_model_metrics, inference
+    from model import train_model, compute_model_metrics, inference, compute_slice_performance
 
     # Add code to load in the data.
     data = pd.read_csv("src/data/census.csv")
@@ -39,15 +39,26 @@ def main():
     # Compute the model's metrics and print them out.
     precision, recall, fbeta = compute_model_metrics(y_test, preds)
 
+    # Compute model metrics on slices of the data.
+    data = data.sort_values(by="education")
+    X, y, enconder, label_binarizer = process_data(
+        data, categorical_features=cat_features, label="salary", training=True
+    )
+
+    # Binarize salary
+    data["salary"] = label_binarizer.transform(data["salary"])
+    preds = inference(model, X)
+
+    # Append predictions to data as a new column.
+    data["preds"] = preds
+
+    # Compute slice performance.
+    compute_slice_performance(data, "education")
+
     # Print metrics.
     print(f"Precision: {precision}")
     print(f"Recall: {recall}")
     print(f"Fbeta b=1: {fbeta}")
-
-
-#     Precision: 0.7480314960629921
-# Recall: 0.60471037555697
-# Fbeta b=1: 0.6687785990848293
 
 
 if __name__ == "__main__":
