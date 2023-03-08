@@ -13,7 +13,7 @@ def read_root():
 def predict():
     # Run prediction using the ML model trained to predict the salary of a person
     # Load ML Model from disk with extension .pb or .h5 using tensorflow or keras
-    model = tf.keras.models.load_model(filepath="../model/saved_model.pb")
-    print("Model loaded correctly")
+    model = tf.keras.models.load_model(filepath="../model")
+    print("model loaded", model.summary())
 
-    return {"Hello": "World"}
+    return {"OK": 200}
