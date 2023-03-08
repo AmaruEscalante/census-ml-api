@@ -1,8 +1,24 @@
+from pydantic import BaseModel
 from fastapi import FastAPI
 import tensorflow as tf
 
 app = FastAPI()
 
+class Input(BaseModel):
+    age: int
+    workclass: str
+    fnlgt: int
+    education: str
+    education_num: int
+    marital_status: str
+    occupation: str
+    relationship: str
+    race: str
+    sex: str
+    capital_gain: int
+    capital_loss: int
+    hours_per_week: int
+    native_country: str
 
 @app.get("/")
 def read_root():
@@ -10,10 +26,9 @@ def read_root():
 
 
 @app.post("/predict")
-def predict():
-    # Run prediction using the ML model trained to predict the salary of a person
-    # Load ML Model from disk with extension .pb or .h5 using tensorflow or keras
+def predict(input: Input):
     model = tf.keras.models.load_model(filepath="../model")
-    print("model loaded", model.summary())
+    
+    print(input)
 
     return {"OK": 200}
