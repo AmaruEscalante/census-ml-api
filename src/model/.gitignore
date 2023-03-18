@@ -1,5 +1,6 @@
 assets/
 variables/
 
-keras_metadata.pb
-saved_model.pb
+/keras_metadata.pb
+/saved_model.pb
+/model.h5
