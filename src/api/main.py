@@ -10,7 +10,6 @@ import pickle
 app = FastAPI()
 to_csv = lambda x: x.replace("_", "-")
 
-
 class Input(BaseModel):
     age: int
     workclass: str
@@ -29,15 +28,24 @@ class Input(BaseModel):
 
     class Config:
         alias_generator = to_csv
-
-    #     schema_extra = {
-    #         "example": {
-    #             "name": "Foo",
-    #             "description": "A very nice Item",
-    #             "price": 35.4,
-    #             "tax": 3.2,
-    #         }
-    #     }
+        schema_extra = {
+            "example": {
+                "age": 40,
+                "workclass": "State-gov",
+                "fnlgt": 77516,
+                "education": "Bachelors",
+                "education-num": 13,
+                "marital-status": "Never-married",
+                "occupation": "Adm-clerical",
+                "relationship": "Not-in-family",
+                "race": "White",
+                "sex": "Male",
+                "capital-gain": "2174",
+                "capital-loss": "0",
+                "hours-per-week": "40",
+                "native-country": "United-States",
+            }
+        }
 
 
 @app.get("/")
