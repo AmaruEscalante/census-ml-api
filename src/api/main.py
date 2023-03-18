@@ -50,7 +50,10 @@ class Input(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {
+        "OK": 200,
+        "message": "Welcome to the API. Please use /docs to see the documentation.",
+    }
 
 
 @app.post("/predict")
