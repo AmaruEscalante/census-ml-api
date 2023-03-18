@@ -1,4 +1,4 @@
 outs:
-- md5: 83d8638a353f445198f14cb5bcd52460
-  size: 93483
+- md5: b76fa02ecfdd5922167347342a2ced40
+  size: 136875
   path: saved_model.pb
