@@ -103,5 +103,4 @@ def inference(model, X):
     """
 
     preds = model.predict(X)
-    preds = np.where(preds > 0.5, 1, 0)
     return preds

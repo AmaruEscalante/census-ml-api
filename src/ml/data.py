@@ -2,10 +2,8 @@ import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder, MinMaxScaler
 
 
-def process_data(
-    X, categorical_features=[], label=None, training=True, encoder=None, lb=None
-):
-    """ Process the data used in the machine learning pipeline.
+def process_data(X, categorical_features=[], label=None, training=True, encoder=None, scaler=None, lb=None):
+    """Process the data used in the machine learning pipeline.
 
     Processes the data using one hot encoding for the categorical features and a
     label binarizer for the labels. This can be used in either training or
@@ -39,6 +37,9 @@ def process_data(
     encoder : sklearn.preprocessing._encoders.OneHotEncoder
         Trained OneHotEncoder if training is True, otherwise returns the encoder passed
         in.
+    scaler : sklearn.preprocessing._data.MinMaxScaler
+        Trained MinMaxScaler if training is True, otherwise returns the scaler passed
+        in.
     lb : sklearn.preprocessing._label.LabelBinarizer
         Trained LabelBinarizer if training is True, otherwise returns the binarizer
         passed in.
@@ -51,8 +52,9 @@ def process_data(
 
     X_categorical = X[categorical_features].values
     X_continuous = X.drop(*[categorical_features], axis=1)
-    lb = LabelBinarizer()
+
     if training is True:
+        lb = LabelBinarizer()
         encoder = OneHotEncoder(sparse=False, handle_unknown="ignore")
         X_categorical = encoder.fit_transform(X_categorical)
         scaler = MinMaxScaler()
@@ -60,6 +62,7 @@ def process_data(
         y = lb.fit_transform(y.values).ravel()
     else:
         X_categorical = encoder.transform(X_categorical)
+        X_continuous = scaler.transform(X_continuous)
         try:
             y = lb.transform(y.values).ravel()
         # Catch the case where y is None because we're doing inference.
@@ -67,4 +70,4 @@ def process_data(
             pass
 
     X = np.concatenate([X_continuous, X_categorical], axis=1)
-    return X, y, encoder, lb
+    return X, y, encoder, scaler, lb
