@@ -33,7 +33,7 @@ def test_column_names(data: pd.DataFrame):
 
 
 def test_processing_data(data: pd.DataFrame):
-    X, y, _, _ = process_data(data, categorical_features=cat_features, label="salary", training=True)
+    X, y, _, _, _ = process_data(data, categorical_features=cat_features, label="salary", training=True)
     # Check that the data is the right shape.
     assert X.shape == (32561, 108)
     assert y.shape == (32561,)
