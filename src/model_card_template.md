@@ -9,10 +9,10 @@ For additional information see the Model Card paper: https://arxiv.org/pdf/1810.
 - The model is intended to be used to classify a persons income as either above or below 50k a year by using a variety of features such as age, education, and occupation.
 - Intended use of this model is to showcase the use of MLOps Tools such as DVC in a production environment.
 ## Training Data
-- The training data was obtained from the UCI Machine Learning Repository.
+- The training data was obtained from the UCI Machine Learning Repository and is a 80% of the dataset.
 
 ## Evaluation Data
-- The evaluation data was obtained from the UCI Machine Learning Repository.
+- The evaluation data was obtained from the UCI Machine Learning Repository and is a 20% of the dataset.
 ## Metrics
 <!-- _Please include the metrics used and your model's performance on those metrics._ -->
 - Precision: 0.7348314606741573
