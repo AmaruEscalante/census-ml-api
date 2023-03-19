@@ -10,3 +10,4 @@ scipy==1.10.0
 tensorflow==2.10.0
 httpx==0.23.3
 dvc==2.45.0
+dvc[s3]
