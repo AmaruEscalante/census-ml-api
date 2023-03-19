@@ -16,7 +16,7 @@ RUN pip install --upgrade pip && \
     apt-get remove -y gcc && \
     apt-get autoremove -y
 
-RUN apt-get update && apt-get install -y awscli
+RUN apt-get update && apt-get install -y awscli git
 
 COPY . /app
 
