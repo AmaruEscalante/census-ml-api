@@ -1,0 +1,12 @@
+.dvc
+.pytest_cache
+__pycache__/
+assets/
+variables/
+
+/keras_metadata.pb
+/saved_model.pb
+/model.h5
+/label_binarizer.pkl
+/scaler.pkl
+/encoder.pkl
